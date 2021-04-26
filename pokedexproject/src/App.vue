@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <div v-for="(poke, index) in pokemons" :key="index">
-      <Poke :name="poke.name" :url="poke.url" :num="index+1" />
+    <div v-for="(poke, index) in pokemons" :key="index" >
+      <div class="column is-two-fifths"><Poke :name="poke.name" :url="poke.url" :num="index+1" /></div>
     </div>
   </div>
 </template>
