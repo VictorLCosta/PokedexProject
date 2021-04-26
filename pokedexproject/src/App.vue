@@ -1,14 +1,28 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <div v-for="(poke, index) in pokemons" :key="index">
+      <Poke :name="poke.name" :url="poke.url" :num="index+1" />
+    </div>
   </div>
 </template>
 
 <script>
-
+import axios from 'axios';
+import Poke from './components/Poke'
 export default {
   name: 'App',
+  data(){
+    return{
+      pokemons: []
+    }
+  },
+  created: function(){
+    axios.get('https://pokeapi.co/api/v2/pokemon?limit=100&offset=200').then(res => {
+      this.pokemons = res.data.results;
+    })
+  },
   components: {
+    Poke
   }
 }
 </script>
