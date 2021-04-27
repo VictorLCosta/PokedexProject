@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <div v-for="(poke, index) in pokemons" :key="index" >
+    <input type="text" placeholder="" v-model="query" class="input is-rounded">
+    <button class="button is-primary is-fullwidth"></button>
+    <div v-for="(poke, index) in queryResult" :key="index" >
       <div class="column is-two-fifths"><Poke :name="poke.name" :url="poke.url" :num="index+1" /></div>
     </div>
   </div>
@@ -13,7 +15,8 @@ export default {
   name: 'App',
   data(){
     return{
-      pokemons: []
+      pokemons: [],
+      query: ''
     }
   },
   created: function(){
@@ -23,6 +26,16 @@ export default {
   },
   components: {
     Poke
+  },
+  computed: {
+    queryResult: function(){
+      if(this.query == '' || this.query == ' '){
+        return this.pokemons;
+      }
+      else{
+        return this.pokemons.filter(pokemon => pokemon.name == this.query)
+      }
+    }
   }
 }
 </script>
